@@ -4,9 +4,17 @@
 
 import os
 
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 from twilio.rest import Client
 
-async def send_text_message(message: str) -> None:
+from mach_prerelease.decorators import thread_task
+
+
+@thread_task
+def send_text_message(message: str) -> None:
 	"""Send testing text messages.
 	Currently, this is only used to notify me about 
 	periodic tasks.
@@ -24,3 +32,41 @@ async def send_text_message(message: str) -> None:
 		from_=os.environ["TWILIO_NUMBER"],
 		body=message,
 	)
+
+
+body = """
+Hello,
+
+Thank you for taking interest in our MLaaS platform.
+We will notify you soon when we are ready for testers.
+
+Many thanks,
+The Machserve Development Team
+"""
+
+@thread_task
+def send_email(email: str, body: str=body) -> None:
+	"""Send an email to the prospective customer.
+
+	Parameters
+	----------
+	email : str
+		The email that was submitted.
+	""" 
+
+	from_address = os.environ.get("EMAIL_USER")
+	try:
+		msg = MIMEMultipart()
+		msg["From"] = from_address
+		msg["To"] = email
+		msg["Subject"] = "Machserve Email Subscription"
+
+		msg.attach(MIMEText(body, "plain"))
+
+		server = smtplib.SMTP("smtp.gmail.com", 587)
+		server.starttls()
+		server.login(from_address, os.environ.get("EMAIL_PASS"))
+		server.sendmail(from_address, email, msg.as_string())
+		server.quit()
+	except:
+		raise
