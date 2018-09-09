@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+firebase-admin = "*"
+aiohttp = "*"
+"aiohttp-jinja2" = "*"
+requests = "*"
+cryptography = "*"
+aiohttp-session = {version = "*", extras = ["secure"]}
+twilio = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"
