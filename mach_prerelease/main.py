@@ -16,6 +16,7 @@ from aiohttp_session.cookie_storage import EncryptedCookieStorage
 from cryptography import fernet
 
 from mach_prerelease.views.views import IndexView
+from mach_prerelease.views.files import StaticFileHandler
 
 async def init_app() -> web.Application:
     """Initialize the async web application
@@ -34,9 +35,13 @@ async def init_app() -> web.Application:
     fernet_key = fernet.Fernet.generate_key()
     secret_key = base64.urlsafe_b64decode(fernet_key)
     setup_session(app, EncryptedCookieStorage(secret_key))
-    app["static_root_url"] = os.environ.get("STATIC_PATH")
+    
     app.router.add_get("/", IndexView.get)
+    app.router.add_get("/static/styles", StaticFileHandler.get_styles)
+    app.router.add_get("/static/scripts", StaticFileHandler.get_scripts)
+    app.router.add_get("/static/assets", StaticFileHandler.get_assets)
     app.router.add_post("/", IndexView.post)
+    
 
     return app
 
