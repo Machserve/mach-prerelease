@@ -5,4 +5,12 @@
         burger.classList.toggle('is-active');
         menu.classList.toggle('is-active');
     });
+
+    particlesJS.load(
+        'particles-js', 
+        '/static/assets', 
+        function() {
+            console.log('callback - particles.js config loaded');
+      },
+    );
 })();
