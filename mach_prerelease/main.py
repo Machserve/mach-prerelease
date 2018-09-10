@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 import asyncio
 import base64
 import logging
@@ -11,12 +10,12 @@ import jinja2
 
 from aiohttp import web
 from aiohttp_session import setup as setup_session
-from aiohttp_session import get_session
 from aiohttp_session.cookie_storage import EncryptedCookieStorage
 from cryptography import fernet
 
 from mach_prerelease.views.views import IndexView
 from mach_prerelease.views.files import StaticFileHandler
+
 
 async def init_app() -> web.Application:
     """Initialize the async web application
@@ -53,7 +52,7 @@ async def shutdown(app: web.Application):
 def main() -> None:
     logging.basicConfig(level=logging.DEBUG)
     app = init_app()
-    web.run_app(app, shutdown_timeout=1.0)
+    web.run_app(app, shutdown_timeout=1.0, port=os.environ.get("PORT", 8080))
 
 
 if __name__ == "__main__":
