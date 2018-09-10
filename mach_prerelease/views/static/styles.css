@@ -39,3 +39,13 @@ body {
 ::before {
   box-sizing: unset !important;
 }
+
+.hero.is-info a.navbar-item:hover {
+  background-color: #b15509 !important;
+}
+
+@media screen and (max-width: 1087px) {
+  .hero.is-info .navbar-menu {
+    background-color: #311d0c !important;
+  }
+}

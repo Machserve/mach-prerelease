@@ -39,6 +39,7 @@ async def init_app() -> web.Application:
     app.router.add_get("/static/styles", StaticFileHandler.get_styles)
     app.router.add_get("/static/scripts", StaticFileHandler.get_scripts)
     app.router.add_get("/static/assets", StaticFileHandler.get_assets)
+    app.router.add_get("/static/favicon.ico", StaticFileHandler.get_favicon)
     app.router.add_post("/", IndexView.post)
     
 
