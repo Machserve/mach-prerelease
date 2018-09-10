@@ -7,20 +7,24 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Machserve MLaaS - Machine Learning as a Service">
 	<title>Machserve MLaaS - Coming Soon</title>
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
-	<link rel="stylesheet" type="text/css" href="https://firebasestorage.googleapis.com/v0/b/mach-prerelease.appspot.com/o/styles.css?alt=media&token=66f14133-947e-4f28-ab5f-b1a320a6b62d">
-	<script async defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/styles">
+	<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+	<script async src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
 </head>
 
 <body>
 	<section class="hero is-info is-fullheight">
+		<div id="particles-js"></div>
 		<div class="hero-head">
 			<nav class="navbar">
 				<div class="container">
 					<div class="navbar-brand">
 						<a class="navbar-item">
-							<img src="http://bulma.io/images/bulma-type-white.png" alt="Logo">
+							<h1 class="title is-1">
+								Machserve
+							</h1>
 						</a>
 						<span class="navbar-burger burger" data-target="navbarMenu">
 							<span></span>
@@ -47,26 +51,32 @@
 		<div class="hero-body">
 			<div class="container has-text-centered">
 				<div class="column is-6 is-offset-3">
-					<h1 class="title">
+					{% if app["msg"] is not none %}
+					<h2 class="title is-2 is-size-4-mobile">
+						Subscribed!
+					</h2>
+					<h3 class="subtitle is-3 is-size-5-mobile">
+						<p> {{ app["msg"] }} </p>
+					</h3>
+					{%- else -%}
+					<h2 class="title is-2 is-size-4-mobile">
 						Coming Soon
-					</h1>
-					<h2 class="subtitle">
+					</h2>
+					<h3 class="subtitle is-3 is-size-5-mobile">
 						Machserve is the future leader of machine learning as-a-service platforms. We bring you easy access to
 						state-of-the-art
 						machine learning implementations so you can focus on <i>your</i> use cases and <u>solve your problems</u>.
-						{% if app["msg"] is not none %}
-						<br>
-						<p> {{ app["msg"][0] }} </p>
-						{% endif %}
+					</h3>
+					{% endif %}
 					</h2>
 					<div class="box">
 						<form method="POST" action="/">
 							<div class="field is-grouped">
 								<p class="control is-expanded">
-									<input class="input" name="email" type="text" placeholder="Enter your email" required>
+									<input class="input" name="email" type="email" placeholder="Enter your email" required>
 								</p>
 								<p class="control">
-									<input type="submit" value="Notify Me" class="button is-info"></input>
+									<input type="submit" value="Notify Me" class="button has-text-white is-mach-orange"></input>
 								</p>
 							</div>
 						</form>
@@ -76,11 +86,12 @@
 		</div>
 
 	</section>
-	<script async type="text/javascript" src="../static/main.js"></script>
+	<script async type="text/javascript" src="static/scripts"></script>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125453686-1"></script>
 	<script async>
 		window.dataLayer = window.dataLayer || [];
+
 		function gtag() {
 			dataLayer.push(arguments);
 		}
