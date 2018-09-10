@@ -39,9 +39,15 @@ Hello,
 
 Thank you for taking interest in our MLaaS platform.
 We will notify you soon when we are ready for testers.
+Please expect an email around early November 2018.
 
-Many thanks,
+Sincerely,
 The Machserve Development Team
+Machserve LLC, 2018
+
+
+You got this email because you entered your email to get an invite for Machserve's MLaaS platform.
+http://machserve.io
 """
 
 @thread_task
@@ -52,6 +58,8 @@ def send_email(email: str, body: str=body) -> None:
 	----------
 	email : str
 		The email that was submitted.
+	body : str
+		The body of the email to be sent.
 	""" 
 
 	from_address = os.environ.get("EMAIL_USER")
@@ -66,7 +74,7 @@ def send_email(email: str, body: str=body) -> None:
 		server = smtplib.SMTP("smtp.gmail.com", 587)
 		server.starttls()
 		server.login(from_address, os.environ.get("EMAIL_PASS"))
-		server.sendmail(from_address, email, msg.as_string())
+		server.sendmail(from_address, [from_address, email], msg.as_string())
 		server.quit()
 	except:
 		raise
