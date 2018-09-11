@@ -53,9 +53,13 @@
 		<div class="hero-body">
 			<div class="container has-text-centered">
 				<div class="column is-6 is-offset-3">
-					{% if app["msg"] is not none %}
+					{% if app["msg"] is not none -%}
 					<h2 class="title is-2 is-size-4-mobile">
+						{% if app["error"] is none -%}
 						Subscribed!
+						{%- else -%}
+						Error.
+						{%- endif %}
 					</h2>
 					<h3 class="subtitle is-3 is-size-5-mobile">
 						<p> {{ app["msg"] }} </p>
@@ -69,7 +73,7 @@
 						state-of-the-art
 						machine learning implementations so you can focus on <i>your</i> use cases and <u>solve your problems</u>.
 					</h3>
-					{% endif %}
+					{%- endif %}
 					</h2>
 					<div class="box">
 						<form method="POST" action="/">

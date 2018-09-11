@@ -42,7 +42,6 @@ class IndexView:
 		"""
 		data = await request.post()
 		session = await get_session(request)
-
 		email = data.get("email")
 		unix_now = time.time()
 		datetime_now = datetime.now()
@@ -55,15 +54,18 @@ class IndexView:
 				session["send_count"] += 1
 				session["last_send"] = unix_now
 				request.app["msg"] = flash_message.format(email=email)
+				request.app["error"] = None
 				send_text_message(text_message.format(email=email, time=datetime_now))
 				send_email(email)
 			else:
 				request.app["msg"] = "Woah! You're requesting emails too quickly."
-		
+				request.app["error"] = True
+
 		if "send_count" not in session:
 			session["send_count"] = 1
 			session["last_send"] = unix_now
 			request.app["msg"] = flash_message.format(email=email)
+			request.app["error"] = None
 			send_text_message(text_message.format(email=email, time=datetime_now))
 			send_email(email)
 		
@@ -73,6 +75,7 @@ class IndexView:
 		print(entry)
 
 		# Insert email, time, and IP into database
+		# TODO
 		
 		response = render_template("index.jinja2", request, {"session": session})
 		response.headers["Content-Language"] = "en"
