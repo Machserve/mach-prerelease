@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import asyncio
-import concurrent.futures
-
 from google.cloud import firestore
 
 from mach_prerelease.models.firestore_document import FirestoreDocument
