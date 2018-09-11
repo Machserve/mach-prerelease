@@ -18,13 +18,13 @@ from mach_prerelease.controllers.firestore_client import FirestoreConnector
 text_message = "{email} joined the mailing list at {time}."
 flash_message = "Thank you for your interest. We will send an email to {email}."
 already_on = "You are already on the mailing list."
-firestore_connector = FirestoreConnector()
+firestore_connector = FirestoreConnector
 
 
 async def check_email(email):
 	results = await run_blocking_tasks(
 				ThreadPoolExecutor(max_workers=3), 
-				firestore_connector.validate_email, 
+				firestore_connector().validate_email, 
 				email,
 			)
 	return results
@@ -42,7 +42,7 @@ async def onboard_prospective(request, email, datetime_now):
 		}
 		await run_blocking_tasks(
 			ThreadPoolExecutor(max_workers=3), 
-			firestore_connector.add_document, 
+			firestore_connector().add_document, 
 			data,
 		)
 		send_text_message(text_message.format(email=email, time=datetime_now))
