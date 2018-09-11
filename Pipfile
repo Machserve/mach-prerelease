@@ -11,6 +11,7 @@ requests = "*"
 cryptography = "*"
 aiohttp-session = {version = "*", extras = ["secure"]}
 twilio = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
