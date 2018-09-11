@@ -4,16 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-firebase-admin = "*"
 aiohttp = "*"
 "aiohttp-jinja2" = "*"
-requests = "*"
 cryptography = "*"
 aiohttp-session = {version = "*", extras = ["secure"]}
 twilio = "*"
 python-dotenv = "*"
 google-cloud-firestore = "*"
 marshmallow = "*"
+requests = "*"
 
 [dev-packages]
 
