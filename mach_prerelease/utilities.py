@@ -2,6 +2,7 @@
 
 """Utility functions and objects."""
 
+import asyncio
 import os
 
 import smtplib
@@ -47,7 +48,7 @@ Machserve LLC, 2018
 
 
 You got this email because you entered your email to get an invite for Machserve's MLaaS platform.
-http://machserve.io
+https://machserve.io
 """
 
 @thread_task
@@ -76,5 +77,14 @@ def send_email(email: str, body: str=body) -> None:
 		server.login(from_address, os.environ.get("EMAIL_PASS"))
 		server.sendmail(from_address, [from_address, email], msg.as_string())
 		server.quit()
-	except:
-		raise
+	except Exception as e:
+		pass
+
+
+async def run_blocking_tasks(executor, func, *args):
+	"""Run a blocking task in an executor."""
+	loop = asyncio.get_event_loop()
+	completed, pending = await asyncio.wait([
+		loop.run_in_executor(executor, func, *args)
+	])
+	return [t.result() for t in completed]
