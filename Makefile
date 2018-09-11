@@ -1,3 +1,3 @@
 
 start:
-	python mach_prerelease/main.py
+	pipenv run python entrypoint.py
