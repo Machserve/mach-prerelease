@@ -12,6 +12,8 @@ cryptography = "*"
 aiohttp-session = {version = "*", extras = ["secure"]}
 twilio = "*"
 python-dotenv = "*"
+google-cloud-firestore = "*"
+marshmallow = "*"
 
 [dev-packages]
 
