@@ -69,9 +69,7 @@ def send_email(email: str, body: str=body) -> None:
 		msg["From"] = from_address
 		msg["To"] = email
 		msg["Subject"] = "Machserve Email Subscription"
-
 		msg.attach(MIMEText(body, "plain"))
-
 		server = smtplib.SMTP("smtp.gmail.com", 587)
 		server.starttls()
 		server.login(from_address, os.environ.get("EMAIL_PASS"))
