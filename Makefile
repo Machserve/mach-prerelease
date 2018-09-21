@@ -1,3 +1,3 @@
 
 start:
-	pipenv run python entrypoint.py
+	pipenv run adev runserver entrypoint.py
