@@ -15,6 +15,7 @@ marshmallow = "*"
 requests = "*"
 
 [dev-packages]
+aiohttp-devtools = "*"
 
 [requires]
 python_version = "3.7"
