@@ -35,7 +35,6 @@ class FirestoreConnector(object):
 		emails = []
 		for document in documents:
 			emails.append(document.to_dict()["email"])
-		print(emails)
 		if email in emails:
 			return False
 		return True
