@@ -43,7 +43,6 @@ async def init_app() -> web.Application:
 	app.router.add_get("/static/favicon.ico", StaticFileHandler.get_favicon)
 	app.router.add_post("/", IndexView.post)
 	
-
 	return app
 
 
@@ -54,10 +53,7 @@ async def shutdown(app: web.Application):
 def main() -> None:
 	logging.basicConfig(level=logging.DEBUG)
 	app = init_app()
-	ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-	ssl_context.load_cert_chain("./ssl/machserve.cer", "./ssl/mach.key")
-	web.run_app(app, shutdown_timeout=1.0, port=os.environ.get("PORT", 8080), ssl_context=ssl_context)
-
+	web.run_app(app, shutdown_timeout=1.0, port=8080)
 
 if __name__ == "__main__":
 	main()
